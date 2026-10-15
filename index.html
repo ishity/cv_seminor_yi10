@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motion Cutout</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Motion Cutout</h1>
+  <p>Pick objects in an image, cut them out, add motion, and export a 2D video. Everything runs in your browser; your image is never uploaded.</p>
+</header>
+
+<main>
+  <section class="stage">
+    <div class="canvas-wrap" id="canvasWrap">
+      <canvas id="view"></canvas>
+      <canvas id="overlay"></canvas>
+      <div id="drop" class="drop">
+        <label for="file">Drop an image here<br>or click to choose</label>
+        <input id="file" type="file" accept="image/*" hidden>
+      </div>
+    </div>
+    <div id="status" class="status">Upload an image to begin.</div>
+  </section>
+
+  <aside class="panel">
+    <div class="step">
+      <h2>1. Find candidates</h2>
+      <button id="detectBtn" disabled>Suggest objects</button>
+      <p class="hint">The first run downloads an AI model (~50MB). To add an object that is not suggested, click it in the image.</p>
+    </div>
+
+    <div class="step">
+      <h2>2. Select objects</h2>
+      <p class="hint">Click a colored region to select / deselect it.</p>
+      <ul id="selList" class="sel-list"></ul>
+    </div>
+
+    <div class="step">
+      <h2>3. Settings</h2>
+      <label class="row"><input type="checkbox" id="fillBg" checked> Fill in the removed background</label>
+      <label class="row">Loop length
+        <input type="range" id="duration" min="2" max="10" value="4"><output id="durOut">4 s</output>
+      </label>
+    </div>
+
+    <div class="step">
+      <h2>4. Play &amp; export</h2>
+      <div class="btns">
+        <button id="playBtn" disabled>Pause</button>
+        <button id="exportBtn" disabled>Save video</button>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<footer>Powered by <a href="https://github.com/huggingface/transformers.js">Transformers.js</a> / SlimSAM</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
